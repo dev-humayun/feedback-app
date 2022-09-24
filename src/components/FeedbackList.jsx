@@ -12,6 +12,8 @@ export default function FeedbackList() {
     <div className='feedback-list'>
         {
             feedback.map((item)=>(
+
+              
                 <FeedbackItem key={item.id} item={item}/>
             ))
         }
