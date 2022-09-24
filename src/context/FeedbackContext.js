@@ -26,6 +26,16 @@ export const FeedbackProvider = ({ children }) => {
         item:{},
         edit:false
     })
+    useEffect(()=>{
+        fetchFeedback()
+    })
+
+    const fetchFeedback=async ()=>{
+        const response=await fetch(`http://localhost:5000/feedback?_sort=id&_order=desc`)
+        const data=await response.json()
+
+        console.log(data)
+    }
 
     const addFeedback = (newFeedback) => {
         newFeedback.id = uuidv4()
