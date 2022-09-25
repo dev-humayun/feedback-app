@@ -3,23 +3,41 @@ import FeedbackItem from './FeedbackItem'
 import PropTypes from 'prop-types'
 import { useContext } from 'react'
 import FeedbackContext from '../context/FeedbackContext'
-
+import Spinner from './shared/Spinner'
 export default function FeedbackList() {
-    const {feedback}=useContext(FeedbackContext)
+    const {feedback,isLoading}=useContext(FeedbackContext)
     console.log(feedback)
-  return (
+
+    if(!isLoading && (!feedback|| feedback.length===0))
+    {
+       return <p>No Feedback Item Yet!!!!</p>
+    }
+
+    return isLoading ? <Spinner /> :(
+      <div className='feedback-list'>
+      {
+          feedback.map((item)=>(
+
+            
+              <FeedbackItem key={item.id} item={item}/>
+          ))
+      }
+    
+  </div>
+    )
+  // return (
   
-    <div className='feedback-list'>
-        {
-            feedback.map((item)=>(
+  //   <div className='feedback-list'>
+  //       {
+  //           feedback.map((item)=>(
 
               
-                <FeedbackItem key={item.id} item={item}/>
-            ))
-        }
+  //               <FeedbackItem key={item.id} item={item}/>
+  //           ))
+  //       }
       
-    </div>
-  )
+  //   </div>
+  // )
 }
 
 
